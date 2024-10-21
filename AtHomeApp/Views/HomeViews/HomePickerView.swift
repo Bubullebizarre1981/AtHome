@@ -12,13 +12,22 @@ struct HomePickerView: View {
     @State var seletectedSection: String = "Maison"
     
     var body: some View {
-        VStack {
-            if seletectedSection == "Maison" {
-                HomeHouseView()
-            } else if seletectedSection == "Recherche" {
-                HomeSearchView()
+        NavigationStack {
+            ZStack {
+                Color.ahWhite
+                    .ignoresSafeArea()
+                VStack {
+                    if seletectedSection == "Maison" {
+                        Spacer()
+                        HomeHouseView()
+                        Spacer()
+                    } else if seletectedSection == "Recherche" {
+                        HomeSearchView()
+                    }
+                    PickerExView(pickerSections: pickerSections, selectedSection: $seletectedSection)
+                }
+                .padding()
             }
-            PickerExView(pickerSections: pickerSections, selectedSection: seletectedSection)
         }
     }
 }
