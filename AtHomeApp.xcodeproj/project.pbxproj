@@ -35,16 +35,6 @@
 			path = AtHomeApp;
 			sourceTree = "<group>";
 		};
-		EA7A91832CB67BA50059CD82 /* AtHomeAppTests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AtHomeAppTests;
-			sourceTree = "<group>";
-		};
-		EA7A918D2CB67BA50059CD82 /* AtHomeAppUITests */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = AtHomeAppUITests;
-			sourceTree = "<group>";
-		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,8 +66,6 @@
 			isa = PBXGroup;
 			children = (
 				EA7A91702CB67BA40059CD82 /* AtHomeApp */,
-				EA7A91832CB67BA50059CD82 /* AtHomeAppTests */,
-				EA7A918D2CB67BA50059CD82 /* AtHomeAppUITests */,
 				EA7A916F2CB67BA40059CD82 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,9 +118,6 @@
 			dependencies = (
 				EA7A91822CB67BA50059CD82 /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				EA7A91832CB67BA50059CD82 /* AtHomeAppTests */,
-			);
 			name = AtHomeAppTests;
 			packageProductDependencies = (
 			);
@@ -152,9 +137,6 @@
 			);
 			dependencies = (
 				EA7A918C2CB67BA50059CD82 /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				EA7A918D2CB67BA50059CD82 /* AtHomeAppUITests */,
 			);
 			name = AtHomeAppUITests;
 			packageProductDependencies = (
