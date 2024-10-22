@@ -11,9 +11,9 @@ struct HomeHouseView: View {
     let symbolArray: [String] = ["fan.fill", "frying.pan.fill", "lightbulb.fill", "lamp.desk.fill", "shower.fill", "bathtub.fill", "chair.lounge.fill", "chair.fill", "cabinet.fill", "sink.fill", "toilet.fill", "refrigerator.fill", "microwave.fill", "cooktop.fill", "oven.fill", "sofa.fill", "bed.double.fill", "spigot.fill", "door.left.hand.closed"]
     
     let widthHouse : CGFloat = 300
-    let heightCaseHouse : CGFloat = 88
+    let heightCaseHouse : CGFloat = 80
     let heightHouse : CGFloat = 560
-    let spacingHouse : CGFloat = 16
+    let spacingHouse : CGFloat = 12
     
     var body: some View {
         ZStack {

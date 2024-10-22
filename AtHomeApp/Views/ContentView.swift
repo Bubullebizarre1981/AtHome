@@ -25,11 +25,11 @@ struct ContentView: View {
     var body: some View {
         TabView {
             Group {
-                HomeHouseView()
+                HomePickerView()
                     .tabItem {
                         Label("Recherche", systemImage: "house")
                     }
-                ObjectsView()
+                GameView()
                     .tabItem {
                         Label("Jeux", systemImage: "arcade.stick")
                     }

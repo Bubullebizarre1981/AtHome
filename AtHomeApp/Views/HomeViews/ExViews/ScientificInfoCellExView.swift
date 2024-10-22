@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ScientificInfoCellView: View {
+struct ScientificInfoCellExView: View {
     var body: some View {
         ZStack {
             VStack(spacing: -30) {
@@ -32,5 +32,5 @@ struct ScientificInfoCellView: View {
 }
 
 #Preview {
-    ScientificInfoCellView()
+    ScientificInfoCellExView()
 }
