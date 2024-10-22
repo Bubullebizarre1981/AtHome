@@ -9,7 +9,7 @@ import SwiftUI
 
 struct PickerExView: View {
     let pickerSections : [String]
-    @State var selectedSection : String
+    @Binding var selectedSection : String
     @State var makeAnimation : Bool = false
     
     var body: some View {
@@ -21,11 +21,11 @@ struct PickerExView: View {
                 }, label : {
                     ZStack {
                         Rectangle()
-                            .fill(selectedSection == section ? .ahOrange : .ahWhite)
+                            .fill(selectedSection == section ? .ahOrange : .ahTrueWhite)
                             .frame(width: 136)
                         Text(section)
                             .font(.system(size: selectedSection == section ? 22 : 18))
-                            .foregroundStyle(selectedSection != section ? .ahOrange : .ahWhite)
+                            .foregroundStyle(selectedSection != section ? .ahOrange : .ahTrueWhite)
                             .fontWeight(selectedSection == section ? .heavy : .bold)
                     }
                 })
@@ -41,5 +41,5 @@ struct PickerExView: View {
 }
 
 #Preview {
-    PickerExView(pickerSections: ["Maison", "Recherche"], selectedSection: "Maison")
+    PickerExView(pickerSections: ["Maison", "Recherche"], selectedSection: .constant("Maison"))
 }

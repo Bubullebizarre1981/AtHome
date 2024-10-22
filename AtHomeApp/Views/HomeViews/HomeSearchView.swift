@@ -8,10 +8,15 @@
 import SwiftUI
 
 struct HomeSearchView: View {
+    let arrayObjects: [String] = ["Hello", "World", "SwiftUI"]
+    
     var body: some View {
-        VStack {
-            Rectangle()
+        ScrollView {
+            ForEach(arrayObjects, id: \.self) { object in
+                ButtonObjectExView(rightOrLeft: true)
+            }
         }
+        .padding()
     }
 }
 
