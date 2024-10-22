@@ -12,10 +12,8 @@ struct ObjectsView: View {
     
     var body: some View {
         NavigationView {
-//            AsyncImage(url: URL(string: "http://localhost:8081/images/objects/cup.png"))
             List(viewModel.objects) { object in
                 HStack {
-                     
                     if let url = URL(string: object.image) {
                         AsyncImage(url: url) { image in
                             image
@@ -23,25 +21,27 @@ struct ObjectsView: View {
                                 .scaledToFit()
                                 .frame(width: 50, height: 50)
                         } placeholder: {
-                            // Placeholder while the image is loading
                             ProgressView()
                         }
                     }
- 
                     VStack(alignment: .leading) {
                         Text(object.name)
                             .font(.headline)
+                        
+                        // Convert the date to a string
+                        Text(formatDate(object.creationDate))
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
                     }
                 }
             }
             .navigationTitle("Cuisine")
             .onAppear {
-                viewModel.fetchObjets() // Make sure this fetches the correct image URLs
+                viewModel.fetchObjects() // Assuming you meant to call fetchObjects instead of fetchUsers
             }
         }
     }
 }
-
 
 #Preview {
     ObjectsView()
