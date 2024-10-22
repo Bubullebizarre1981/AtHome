@@ -14,9 +14,7 @@ struct GameView: View {
         NavigationView {
             HStack {
                 Image(systemName: "attention")
-                Text("WORK IN PROGRESS")
-                    .foregroundStyle(.red)
-            }
+                Text("WORK IN PROGRESS")            }
         }
     }
 }

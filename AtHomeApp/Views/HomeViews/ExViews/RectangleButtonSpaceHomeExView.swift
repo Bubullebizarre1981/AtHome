@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct RectangleButtonSpaceHomeExView: View {
-    let heightButton: CGFloat
+    let width: CGFloat
+    let height: CGFloat
+    let space: Space
     
     var body: some View {
         NavigationLink(destination: {
@@ -17,18 +19,16 @@ struct RectangleButtonSpaceHomeExView: View {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)
                     .stroke(.ahOrange, lineWidth: 8)
-                    .frame(height: heightButton)
-                Image("AH_testImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: heightButton)
+                    .frame(width : width, height: height)
+                AsyncImage(url : URL(string : space.image))
+                    .frame(width : width, height: height)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
-                Text("Test")
+                Text(space.name)
                     .foregroundStyle(.ahTrueBlack)
                     .padding(8)
                     .background(content: {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(.ahWhite.opacity(0.5))
+                            .fill(.ahWhite.opacity(0.75))
                             .stroke(.ahTrueBlack, lineWidth: 1)
                     })
             }
@@ -37,5 +37,5 @@ struct RectangleButtonSpaceHomeExView: View {
 }
 
 #Preview {
-    RectangleButtonSpaceHomeExView(heightButton: 100)
+    RectangleButtonSpaceHomeExView(width : 100, height: 100, space : Space(id: UUID(), name: "Test", image: "AH_testImage"))
 }

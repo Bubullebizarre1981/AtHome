@@ -33,17 +33,35 @@ struct HomeHouseView: View {
                         .stroke(.ahOrange, lineWidth: 6)
                         .frame(width : widthHouse, height: 488)
                     VStack(spacing : spacingHouse) {
-                        TriangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        RectangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
+                        if spaceViewModel.spaces.count == 9 {
+                            TriangleButtonSpaceHomeExView(width: widthHouse * 0.7, height: heightCaseHouse, space: spaceViewModel.spaces[5])
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[3], spaceViewModel.spaces[1]],
+                                                 separationPercentage: 0.55)
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[8], spaceViewModel.spaces[7]],
+                                                 separationPercentage: 0.4)
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[2], spaceViewModel.spaces[4]],
+                                                 separationPercentage: 0.5)
+                            RectangleButtonSpaceHomeExView(width: widthHouse * 0.7, height: heightCaseHouse, space: spaceViewModel.spaces[6])
+                        }
                     }
-                    .frame(width : widthHouse * 0.7)
                 }
-                RectangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
-                    .frame(width : widthHouse * 0.72, height: heightCaseHouse)
-                    .shadow(radius: 5, y : 12)
+                if spaceViewModel.spaces.count == 9 {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .frame(width: widthHouse * 0.72, height: heightCaseHouse)
+                            .shadow(radius: 5, y : 12)
+                        RectangleButtonSpaceHomeExView(width: widthHouse * 0.72, height: heightCaseHouse, space: spaceViewModel.spaces[0])
+                    }
+                }
             }
         }
         .onAppear(perform: {

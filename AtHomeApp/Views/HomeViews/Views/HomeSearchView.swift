@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct HomeSearchView: View {
-    let arrayObjects: [String] = ["Hello", "World", "SwiftUI"]
+    @ObservedObject var objectViewModel = ObjectViewModel()
     
     var body: some View {
         ScrollView {
-            ForEach(arrayObjects, id: \.self) { object in
+            ForEach(objectViewModel.objects) { object in
                 ButtonObjectExView(rightOrLeft: true)
             }
         }
-        .padding()
+        .onAppear(perform: {
+            objectViewModel.fetchObjects()
+        })
     }
 }
 

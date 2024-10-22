@@ -14,8 +14,8 @@ class SpaceViewModel: ObservableObject {
      
      - Returns : Rien.
      */
+    
     public func fetchSpaces() {
-        print("fetching data")
         guard let url = URL(string: "http://localhost:8081/spaces") else {
             print("Invalid URL")
             return
