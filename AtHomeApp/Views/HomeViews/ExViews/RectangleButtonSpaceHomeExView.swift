@@ -14,7 +14,7 @@ struct RectangleButtonSpaceHomeExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            
+            DetailledSpaceListeView(space: Space(name: "Test", image: "AH_testImage"))
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)

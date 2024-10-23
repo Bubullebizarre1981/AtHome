@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct DetailledSpaceListeView2: View {
+struct DetailledSpaceListeView: View {
     @ObservedObject var viewModel: ObjectViewModel = ObjectViewModel()
     let columns = [
         GridItem(.fixed(100)),
@@ -64,5 +64,5 @@ extension Array {
 }
 
 #Preview {
-    DetailledSpaceListeView2(viewModel: ObjectViewModel(), space: Space(id: UUID(), name: "Cuisine", image: "http://localhost:8081/images/spaces/kitchen.jpg"))
+    DetailledSpaceListeView(viewModel: ObjectViewModel(), space: Space(id: UUID(), name: "Cuisine", image: "http://localhost:8081/images/spaces/kitchen.jpg"))
 }

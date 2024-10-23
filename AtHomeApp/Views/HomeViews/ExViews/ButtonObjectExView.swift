@@ -12,7 +12,7 @@ struct ButtonObjectExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            
+            DetailedItemView()
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)
@@ -22,7 +22,7 @@ struct ButtonObjectExView: View {
                 HStack {
                     if rightOrLeft {
                         Spacer()
-                        TextDisplayExView()
+                        TextDisplayExView(textToDisplay: "Test")
                             .rotationEffect(.degrees(-10))
                         Spacer()
                         ImageObjectExView(imageSize : 100)
@@ -33,7 +33,7 @@ struct ButtonObjectExView: View {
                         ImageObjectExView(imageSize : 100)
                             .rotationEffect(.degrees(-10))
                         Spacer()
-                        TextDisplayExView()
+                        TextDisplayExView(textToDisplay: "Test")
                             .rotationEffect(.degrees(10))
                         Spacer()
                     }
