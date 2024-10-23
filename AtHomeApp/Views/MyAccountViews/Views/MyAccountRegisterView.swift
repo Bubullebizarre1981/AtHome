@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct MyAccountRegisterView: View {
-    
     @State private var name = ""
     @State private var email = ""
     @State private var password = ""
@@ -17,6 +16,7 @@ struct MyAccountRegisterView: View {
     @State private var souvenirDeMoi = false
     
     var body: some View {
+        Spacer()
         VStack(spacing: 20) {
             HStack {
                 Image(systemName: "person.fill")
@@ -74,6 +74,7 @@ struct MyAccountRegisterView: View {
             )
         }
         .padding()
+        Spacer()
     }
     
     func registerUser() {
