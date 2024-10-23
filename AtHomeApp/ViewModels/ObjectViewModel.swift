@@ -34,4 +34,28 @@ class ObjectViewModel: ObservableObject {
             }
         }.resume()
     }
+    
+    func fetchObjectsBySpaceName(for spaceName: String) {
+        guard let url = URL(string: "http://localhost:8081/objects/spaces/\(spaceName)") else {
+            print("Invalid URL")
+            return
+        }
+        
+        print(url)
+        
+        URLSession.shared.dataTask(with: url) { data, response, error in
+            if let data = data {
+                do {
+                    let decodedObjects = try JSONDecoder().decode([Object].self, from: data)
+                    DispatchQueue.main.async {
+                        self.objects = decodedObjects
+                    }
+                } catch {
+                    print("Error decoding data: \(data)")
+                }
+            } else if let error = error {
+                print("Error fetching data: \(error)")
+            }
+        }.resume()
+    }
 }
