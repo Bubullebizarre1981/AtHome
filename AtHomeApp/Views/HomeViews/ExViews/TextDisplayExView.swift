@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TextDisplayExView: View {
-//    let textToDisplay : String
+    let textToDisplay : String
     
     var body: some View {
         ZStack {
-            Text("Text To Display")
+            Text(textToDisplay)
                 .foregroundStyle(.ahTrueWhite)
                 .font(.system(size : 24))
                 .bold()
@@ -33,5 +33,5 @@ struct TextDisplayExView: View {
 }
 
 #Preview {
-    TextDisplayExView()
+    TextDisplayExView(textToDisplay: "Hello, World!")
 }
