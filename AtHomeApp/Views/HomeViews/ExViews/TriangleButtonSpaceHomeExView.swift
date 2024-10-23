@@ -14,7 +14,7 @@ struct TriangleButtonSpaceHomeExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            DetailledSpaceListeView(space: Space(name: "Test", image: "AH_testImage"))
+            DetailledSpaceListeView(space: space)
         }, label: {
             ZStack {
                 Triangle()

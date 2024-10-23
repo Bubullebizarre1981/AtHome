@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct BackgroundImageDestailledSpaceListeExView: View {
+    var imageUrl: String
+    var opacity: Double = 0.5
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        AsyncImage(url: URL(string: imageUrl)) { phase in
+            if let image = phase.image {
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .ignoresSafeArea(edges:.top)
+                    .padding(.leading, 530)
+            }
+        }
+        .blur(radius: 5)
+        Rectangle()
+            .fill(Color.white.opacity(0.5))
+            .blur(radius: 10)
+            .ignoresSafeArea()
     }
-}
-
-#Preview {
-    BackgroundImageDestailledSpaceListeExView()
 }
