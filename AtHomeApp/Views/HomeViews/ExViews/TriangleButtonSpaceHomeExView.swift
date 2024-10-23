@@ -8,7 +8,9 @@
 import SwiftUI
 
 struct TriangleButtonSpaceHomeExView: View {
-    let heightButton: CGFloat
+    let width: CGFloat
+    let height: CGFloat
+    let space: Space
     
     var body: some View {
         NavigationLink(destination: {
@@ -17,18 +19,16 @@ struct TriangleButtonSpaceHomeExView: View {
             ZStack {
                 Triangle()
                     .stroke(.ahOrange, lineWidth: 8)
-                    .frame(height: heightButton)
-                Image("AH_testImage")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(height: heightButton)
+                    .frame(width : width, height: height)
+                AsyncImage(url : URL(string : space.image))
+                    .frame(width : width, height: height)
                     .clipShape(Triangle())
-                Text("Text")
+                Text(space.name)
                     .foregroundStyle(.ahTrueBlack)
                     .padding(8)
                     .background(content: {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(.ahWhite.opacity(0.5))
+                            .fill(.ahWhite.opacity(0.75))
                             .stroke(.ahTrueBlack, lineWidth: 1)
                     })
             }
@@ -37,5 +37,5 @@ struct TriangleButtonSpaceHomeExView: View {
 }
 
 #Preview {
-    TriangleButtonSpaceHomeExView(heightButton: 100)
+    TriangleButtonSpaceHomeExView(width: 100, height: 100, space: Space(id: UUID(), name: "Test", image: "Test"))
 }

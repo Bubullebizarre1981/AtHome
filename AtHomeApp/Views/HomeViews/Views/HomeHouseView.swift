@@ -8,9 +8,11 @@
 import SwiftUI
 
 struct HomeHouseView: View {
-    let symbolArray: [String] = ["fan.fill", "frying.pan.fill", "lightbulb.fill", "lamp.desk.fill", "shower.fill", "bathtub.fill", "chair.lounge.fill", "chair.fill", "cabinet.fill", "sink.fill", "toilet.fill", "refrigerator.fill", "microwave.fill", "cooktop.fill", "oven.fill", "sofa.fill", "bed.double.fill", "spigot.fill", "door.left.hand.closed"]
+    let symbolArray: [String] = ["fan.fill", "frying.pan.fill", "lightbulb.fill", "lamp.desk.fill", "shower.fill", "bathtub.fill", "chair.lounge.fill", "chair.fill", "cabinet.fill", "sink.fill", "toilet.fill", "refrigerator.fill", "microwave.fill", "cooktop.fill", "oven.fill"]
     
-    let widthHouse : CGFloat = 300
+    @ObservedObject var spaceViewModel = SpaceViewModel()
+    
+    let widthHouse : CGFloat = 350
     let heightCaseHouse : CGFloat = 80
     let heightHouse : CGFloat = 560
     let spacingHouse : CGFloat = 12
@@ -23,44 +25,48 @@ struct HomeHouseView: View {
             }
             VStack(spacing : spacingHouse * 2) {
                 ZStack {
-                    VStack(spacing : 0) {
-                        ZStack {
-                            Triangle()
-                                .fill()
-                                .stroke(.ahOrange, lineWidth: 10)
-                                .shadow(radius: 5, y : 12)
-                            Triangle()
-                                .fill(.ahLightBlue)
-                        }
-                        .frame(width : widthHouse * 1.2, height: heightCaseHouse*1.3)
-                        ZStack {
-                            Rectangle()
-                                .fill()
-                                .stroke(.ahOrange, lineWidth: 10)
-                                .shadow(radius: 5, y : 12)
-                            Rectangle()
-                                .foregroundStyle(LinearGradient(gradient: Gradient(colors: [.ahLightBlue, .ahBeige, .ahBeige]), startPoint: .top, endPoint: .bottom))
-                        }
-                        .frame(width: widthHouse * 1.05)
-                    }
-                    .frame(height: (heightCaseHouse * 5 + spacingHouse * 4)*1.06)
+                    House(roofSize : 110, roofWingsSize: 30)
+                        .frame(width : widthHouse, height: 488)
+                        .shadow(radius: 5, y : 12)
+                    House(roofSize : 110, roofWingsSize: 30)
+                        .fill(LinearGradient(gradient: Gradient(colors: [.ahLightBlue, .ahBeige]), startPoint: .top, endPoint: .bottom))
+                        .stroke(.ahOrange, lineWidth: 6)
+                        .frame(width : widthHouse, height: 488)
                     VStack(spacing : spacingHouse) {
-                        TriangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        LineSpaceHouseExView(spacingHouse: spacingHouse, heightButton: heightCaseHouse)
-                        RectangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
+                        if spaceViewModel.spaces.count == 9 {
+                            TriangleButtonSpaceHomeExView(width: widthHouse * 0.7, height: heightCaseHouse, space: spaceViewModel.spaces[5])
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[3], spaceViewModel.spaces[1]],
+                                                 separationPercentage: 0.55)
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[8], spaceViewModel.spaces[7]],
+                                                 separationPercentage: 0.4)
+                            LineSpaceHouseExView(spacing: spacingHouse,
+                                                 width: widthHouse * 0.7,
+                                                 height: heightCaseHouse,
+                                                 spaceArray: [spaceViewModel.spaces[2], spaceViewModel.spaces[4]],
+                                                 separationPercentage: 0.5)
+                            RectangleButtonSpaceHomeExView(width: widthHouse * 0.7, height: heightCaseHouse, space: spaceViewModel.spaces[6])
+                        }
                     }
-                    .frame(width : widthHouse*0.9)
                 }
-                .frame(width : widthHouse)
-                RectangleButtonSpaceHomeExView(heightButton: heightCaseHouse)
-                    .frame(width : widthHouse * 0.92, height: heightCaseHouse)
-                    .shadow(radius: 5, y : 12)
-                
+                if spaceViewModel.spaces.count == 9 {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 8)
+                            .frame(width: widthHouse * 0.72, height: heightCaseHouse)
+                            .shadow(radius: 5, y : 12)
+                        RectangleButtonSpaceHomeExView(width: widthHouse * 0.72, height: heightCaseHouse, space: spaceViewModel.spaces[0])
+                    }
+                }
             }
-//            .frame(width : widthHouse, height: heightHouse)
         }
+        .onAppear(perform: {
+            spaceViewModel.fetchSpaces()
+        })
     }
 }
 

@@ -11,30 +11,36 @@ struct ButtonObjectExView: View {
     let rightOrLeft: Bool
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 8)
-                .fill(.ahWhite)
-                .frame(height : 160)
-            HStack {
-                if rightOrLeft {
-                    Spacer()
-                    TextDisplayExView()
-                        .rotationEffect(.degrees(-10))
-                    Spacer()
-                    ImageObjectExView(imageSize : 100)
-                        .rotationEffect(.degrees(10))
-                    Spacer()
-                } else {
-                    Spacer()
-                    ImageObjectExView(imageSize : 100)
-                        .rotationEffect(.degrees(-10))
-                    Spacer()
-                    TextDisplayExView()
-                        .rotationEffect(.degrees(10))
-                    Spacer()
+        NavigationLink(destination: {
+            
+        }, label: {
+            ZStack {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.ahWhite)
+                    .frame(height : 160)
+                    .shadow(radius: 3, y: 3)
+                HStack {
+                    if rightOrLeft {
+                        Spacer()
+                        TextDisplayExView()
+                            .rotationEffect(.degrees(-10))
+                        Spacer()
+                        ImageObjectExView(imageSize : 100)
+                            .rotationEffect(.degrees(10))
+                        Spacer()
+                    } else {
+                        Spacer()
+                        ImageObjectExView(imageSize : 100)
+                            .rotationEffect(.degrees(-10))
+                        Spacer()
+                        TextDisplayExView()
+                            .rotationEffect(.degrees(10))
+                        Spacer()
+                    }
                 }
             }
-        }
+            .padding(3)
+        })
     }
 }
 

@@ -8,17 +8,20 @@
 import SwiftUI
 
 struct LineSpaceHouseExView: View {
-    let spacingHouse: CGFloat
-    let heightButton: CGFloat
+    let spacing: CGFloat
+    let width: CGFloat
+    let height: CGFloat
+    let spaceArray: [Space]
+    let separationPercentage: Double
     
     var body: some View {
-        HStack(spacing : spacingHouse) {
-            RectangleButtonSpaceHomeExView(heightButton: heightButton)
-            RectangleButtonSpaceHomeExView(heightButton: heightButton)
+        HStack(spacing : spacing) {
+            RectangleButtonSpaceHomeExView(width: (width - spacing) * separationPercentage, height: height, space: spaceArray[0])
+            RectangleButtonSpaceHomeExView(width: (width - spacing) * (1 - separationPercentage), height: height, space: spaceArray[1])
         }
     }
 }
 
 #Preview {
-    LineSpaceHouseExView(spacingHouse: 10, heightButton: 100)
+    LineSpaceHouseExView(spacing: 10, width: 100, height: 100, spaceArray: [Space(id: UUID(), name: "Test", image: "AH_testImage"), Space(id: UUID(), name: "Test", image: "AH_testImage")], separationPercentage: 0.5)
 }
