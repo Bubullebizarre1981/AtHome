@@ -23,18 +23,17 @@ struct HomeSearchView: View {
             ForEach(objectViewModel.objects) { object in
                 if searchText.isEmpty {
                     ButtonObjectExView(rightOrLeft: true, object: object)
-                } else if object.name.contains(searchText) {
+                } else if object.name.lowercased().contains(searchText.lowercased()) {
                     ButtonObjectExView(rightOrLeft: true, object: object)
                 }
             }
-            
-            .onAppear(perform: {
-                objectViewModel.fetchObjects()
-            })
         }
+        .onAppear(perform: {
+            objectViewModel.fetchObjects()
+        })
     }
-    
 }
+
 #Preview {
     HomeSearchView()
 }
