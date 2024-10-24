@@ -13,28 +13,28 @@ struct ButtonObjectExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            DetailedItemView(object: Object(name: "Test", image: "AH_testImage", description: "Tst", creationDate: "Test"))
+            DetailedItemView(object: object)
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(.ahWhite)
-                    .frame(height : 160)
+                    .frame(height : 120)
                     .shadow(radius: 3, y: 3)
                 HStack {
                     if rightOrLeft {
                         Spacer()
-                        TextDisplayExView(textToDisplay: "Test")
+                        TextDisplayExView(textToDisplay: object.name)
                             .rotationEffect(.degrees(-10))
                         Spacer()
-                        ImageObjectExView(imageSize : 100, imageUrl: object.image)
+                        ImageObjectExView(imageSize : 80, imageUrl: object.image)
                             .rotationEffect(.degrees(10))
                         Spacer()
                     } else {
                         Spacer()
-                        ImageObjectExView(imageSize : 100, imageUrl: object.image)
+                        ImageObjectExView(imageSize : 80, imageUrl: object.image)
                             .rotationEffect(.degrees(-10))
                         Spacer()
-                        TextDisplayExView(textToDisplay: "Test")
+                        TextDisplayExView(textToDisplay: object.name)
                             .rotationEffect(.degrees(10))
                         Spacer()
                     }
