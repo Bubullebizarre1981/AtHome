@@ -9,43 +9,32 @@ import SwiftUI
 
 struct ButtonObjectExView: View {
     let rightOrLeft: Bool
-    let object: Object
     
     var body: some View {
         NavigationLink(destination: {
-            
+            DetailedItemView(object: Object(name: "Test", image: "AH_testImage", description: "Tst", creationDate: "Test"))
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)
                     .fill(.ahWhite)
-                    .frame(height : 120)
-                    .shadow(radius: 2, y: 4)
+                    .frame(height : 160)
+                    .shadow(radius: 3, y: 3)
                 HStack {
                     if rightOrLeft {
                         Spacer()
-<<<<<<< Updated upstream
-                        TextDisplayExView()
+                        TextDisplayExView(textToDisplay: "Test")
                             .rotationEffect(.degrees(-10))
-=======
-                        TextDisplayExView(textToDisplay: object.name)
-                            .rotationEffect(.degrees(.random(in: (-20)...(-5))))
->>>>>>> Stashed changes
                         Spacer()
-                        ImageObjectExView(imageSize : 80, imageUrl: object.image)
-                            .rotationEffect(.degrees(.random(in: 5...20)))
+                        ImageObjectExView(imageSize : 100)
+                            .rotationEffect(.degrees(10))
                         Spacer()
                     } else {
                         Spacer()
-                        ImageObjectExView(imageSize : 80, imageUrl: object.image)
-                            .rotationEffect(.degrees(.random(in: (-20)...(-5))))
+                        ImageObjectExView(imageSize : 100)
+                            .rotationEffect(.degrees(-10))
                         Spacer()
-<<<<<<< Updated upstream
-                        TextDisplayExView()
+                        TextDisplayExView(textToDisplay: "Test")
                             .rotationEffect(.degrees(10))
-=======
-                        TextDisplayExView(textToDisplay: object.name)
-                            .rotationEffect(.degrees(.random(in: 5...20)))
->>>>>>> Stashed changes
                         Spacer()
                     }
                 }
@@ -56,5 +45,5 @@ struct ButtonObjectExView: View {
 }
 
 #Preview {
-    ButtonObjectExView(rightOrLeft: false, object: Object(id: UUID(), name: "Test", image: "http://localhost:8081/images/spaces/garden.jpg", description: "Description", creationDate: "Test"))
+    ButtonObjectExView(rightOrLeft: false)
 }

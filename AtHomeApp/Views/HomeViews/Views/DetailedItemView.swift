@@ -8,20 +8,26 @@
 import SwiftUI
 
 struct DetailedItemView: View {
+    @ObservedObject var scientificInfoViewModel: ScientificInfoViewModel = ScientificInfoViewModel()
+    var object: Object
     var body: some View {
         VStack {
-            ImageObjectExView(imageSize: 200, imageUrl: "http://localhost:8081/images/spaces/garden.jpg")
-//            ScrollView() {
-//                VStack(spacing : 20) {
-//                    ForEach (ScientificInfoViewModel.news) {news in
-//                        NewsTagView(newsTitle: news.newsTitle, newsImage: news.newsImage, newsWebName: news.newsWebName, newsDate: news.newsDate, isFavorite: news.isFavorite)
-//                    }
-//                }
-//            }
-        }
+            ImageObjectExView(imageSize: 200)
+            ScrollView() {
+                VStack(spacing : 20) {
+                    ForEach (scientificInfoViewModel.scientificInfos) {info in
+                        ScientificInfoCellExView()
+                    }
+                }
+            }
+        }.onAppear(perform:{
+            scientificInfoViewModel.fetchInfosByObjetcID(objectID: object.id.uuidString)
+            print(scientificInfoViewModel.scientificInfos)
+            print("to")
+        })
     }
 }
 
 #Preview {
-    DetailedItemView()
+    DetailedItemView(object: Object(name: "Test", image: "AH_testImage", description: "Tst", creationDate: "Test"))
 }
