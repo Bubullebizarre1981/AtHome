@@ -12,15 +12,21 @@ struct ScientificInfoCellExView: View {
     let bodyText: String
     
     var body: some View {
-        VStack (spacing: 20){
-            TextDisplayExView(textToDisplay: titleText)
-            Text(bodyText)
-                .frame(width: 300)
-                .foregroundColor(Color(.black))
+        VStack(spacing: 20){
+            HStack {
+                TextDisplayExView(textToDisplay: titleText)
+                    .rotationEffect(.degrees(.random(in: -5...0)))
+                Spacer()
+            }
+            HStack {
+                Text(bodyText)
+                    .foregroundColor(Color(.black))
+                Spacer()
+            }
         }
     }
 }
 
 #Preview {
-    ScientificInfoCellExView(titleText:"Title", bodyText: "Body")
+    ScientificInfoCellExView(titleText:"Title", bodyText: "Bodycezonchfiezocfhvezoucnoezcnvzevcnezovncozeckvnezonvcezoinvceizovncozevcnzeoivbnczoevcnbzeoivcnzeoivcneziocvnzeonvciezh")
 }
