@@ -10,6 +10,7 @@ import SwiftUI
 struct ImageObjectExView: View {
     @State var offsetValue : CGFloat = 0
     let imageSize : CGFloat
+    let imageUrl: String
     
     var body: some View {
         ZStack {
@@ -27,11 +28,17 @@ struct ImageObjectExView: View {
                 .stroke(LinearGradient(gradient: Gradient(colors: [.ahBeige, .ahOrange]), startPoint: .top, endPoint: .bottom), lineWidth: imageSize / 10)
                 .frame(width: imageSize, height : imageSize)
                 .shadow(radius: 1, y : 2)
-            Image("AH_testImage")
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width : imageSize, height: imageSize)
-                .clipShape(RoundedRectangle(cornerRadius: 10))
+            RoundedRectangle(cornerRadius: 10)
+                .fill(.ahTrueWhite)
+                .frame(width: imageSize, height : imageSize)
+            AsyncImage(url: URL(string : imageUrl)) { image in
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+            } placeholder: {
+                Color.gray
+            }
+            .frame(width: imageSize, height : imageSize)
         }
         .onAppear(perform: {
             offsetValue = imageSize / 10
@@ -40,5 +47,5 @@ struct ImageObjectExView: View {
 }
 
 #Preview {
-    ImageObjectExView(imageSize: 200)
+    ImageObjectExView(imageSize: 200, imageUrl: "http://127.0.0.1:8081/images/objects/whisk.png")
 }

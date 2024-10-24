@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailedItemView: View {
     var body: some View {
         VStack {
-            ImageObjectExView(imageSize: 200)
+            ImageObjectExView(imageSize: 200, imageUrl: "http://localhost:8081/images/spaces/garden.jpg")
 //            ScrollView() {
 //                VStack(spacing : 20) {
 //                    ForEach (ScientificInfoViewModel.news) {news in
