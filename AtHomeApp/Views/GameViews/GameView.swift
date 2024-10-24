@@ -12,9 +12,7 @@ struct GameView: View {
     
     var body: some View {
         NavigationView {
-            HStack {
-                Image(systemName: "attention")
-                Text("WORK IN PROGRESS")            }
+            Text("WORK IN PROGRESS")
         }
     }
 }

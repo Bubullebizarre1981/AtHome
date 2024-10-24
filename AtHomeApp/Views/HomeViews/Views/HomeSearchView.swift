@@ -9,19 +9,27 @@ import SwiftUI
 
 struct HomeSearchView: View {
     @ObservedObject var objectViewModel = ObjectViewModel()
+    @State var rightOrLeft: Bool = true
     
     var body: some View {
-        ScrollView {
-            ForEach(objectViewModel.objects) { object in
-                ButtonObjectExView(rightOrLeft: true)
+        VStack {
+            if objectViewModel.objects.isEmpty {
+                ZStack {
+                    Rectangle()
+                        .fill(.clear)
+                    Text("No Data Found")
+                }
+            } else {
+                ScrollView {
+                    ForEach(objectViewModel.objects) { object in
+                        ButtonObjectExView(rightOrLeft: rightOrLeft, object: object)
+                    }
+                }
             }
         }
-        .onAppear(perform: {
+        .onAppear{
             objectViewModel.fetchObjects()
-        })
+        }
     }
 }
 
-#Preview {
-    HomeSearchView()
-}
