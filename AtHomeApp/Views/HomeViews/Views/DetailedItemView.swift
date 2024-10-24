@@ -12,21 +12,21 @@ struct DetailedItemView: View {
     var object: Object
     
     var body: some View {
-        VStack {
+        VStack(spacing:50){
             ImageObjectExView(imageSize: 200, imageUrl: object.image)
             ScrollView() {
                 VStack(spacing : 20) {
                     ForEach (scientificInfoViewModel.scientificInfos) {info in
-                        ScientificInfoCellExView()
+                        ScientificInfoCellExView(titleText:info.title, bodyText:info.text)
                     }
                 }
             }
         }.onAppear(perform:{
-            scientificInfoViewModel.fetchInfosByObjetcID(objectID: object.id.uuidString)
+            scientificInfoViewModel.fetchInfosByObjetcName(objectName: object.name)
         })
     }
 }
 
 #Preview {
-    DetailedItemView(object: Object(name: "Test", image: "AH_testImage", description: "Tst", creationDate: "Test"))
+    DetailedItemView(object: Object(name: "Tasse", image: "http://127.0.0.1:8081/images/objects/cup.png", description: "Tst", creationDate: "Test"))
 }
