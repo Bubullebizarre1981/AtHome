@@ -12,7 +12,7 @@ struct ButtonObjectExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            DetailedItemView()
+            DetailedItemView(object: Object(name: "Test", image: "AH_testImage", description: "Tst", creationDate: "Test"))
         }, label: {
             ZStack {
                 RoundedRectangle(cornerRadius: 8)

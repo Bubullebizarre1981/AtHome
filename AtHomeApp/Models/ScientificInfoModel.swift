@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct ScientificInfo: Identifiable {
-    let id = UUID()
+struct ScientificInfo: Identifiable, Codable {
+    let id : UUID
     let title: String
     let text: String
 }
