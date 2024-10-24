@@ -10,41 +10,22 @@ import SwiftUI
 struct DetailledSpaceListeView: View {
     @ObservedObject var viewModel: ObjectViewModel = ObjectViewModel()
     let columns = [
-        GridItem(.fixed(100)),
-        GridItem(.fixed(100))
+        GridItem(.fixed(180)),
+        GridItem(.fixed(180))
     ]
     var space: Space
     var body: some View {
         ZStack {
-            AsyncImage(url: URL(string: space.image)) { phase in
-                if let image = phase.image {
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .opacity(0.5)
-                        .ignoresSafeArea(edges:.top)
-                        .padding(.leading, 530)
-                }
-            }
+            BackgroundImageDestailledSpaceListeExView(imageUrl: space.image)
             VStack {
-                RoundedRectangle(cornerRadius: 30)
-                    .fill(Color("AH_DarkBlue"))
-                    .frame(width: 300, height: 80)
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 30)
-                            .fill(Color.white)
-                            .frame(width: 280, height: 66)
-                            .padding(.leading, 5)
-                    )
-                    .overlay(
-                        Text("Cuisine")
-                            .font(.title)
-                            .fontWeight(.bold)
-                            .foregroundColor(.black)
-                    )
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(viewModel.objects) { object in
-                        Text(object.name)
+                ButtonDetailledSpaceListeExView(width1: 300, height1: 80, width2: 280, height2: 66, name: space.name)
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 20) {
+                        ForEach(viewModel.objects) { object in
+                                ButtonDetailledSpaceListeExView(width1: 125, height1: 125, width2: 110, height2: 110, image: object.image, name: object.name)
+                            .rotationEffect(.degrees(Double.random(in: -15...15)))
+                            .padding()
+                        }
                     }
                 }
             }
@@ -55,14 +36,6 @@ struct DetailledSpaceListeView: View {
     }
 }
 
-extension Array {
-    func chunked(into size: Int) -> [[Element]] {
-        stride(from: 0, to: count, by: size).map {
-            Array(self[$0..<Swift.min($0 + size, count)])
-        }
-    }
-}
-
-#Preview {
-    DetailledSpaceListeView(viewModel: ObjectViewModel(), space: Space(id: UUID(), name: "Cuisine", image: "http://localhost:8081/images/spaces/kitchen.jpg"))
-}
+//#Preview {
+//    DetailledSpaceListeView(viewModel: ObjectViewModel(), space: Space(id: UUID(), name: "Salle d'eau", image: "http://localhost:8081/images/spaces/bathroom.jpg"))
+//}

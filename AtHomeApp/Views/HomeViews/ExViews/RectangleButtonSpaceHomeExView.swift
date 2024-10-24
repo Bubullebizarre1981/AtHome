@@ -14,7 +14,7 @@ struct RectangleButtonSpaceHomeExView: View {
     
     var body: some View {
         NavigationLink(destination: {
-            DetailledSpaceListeView(space: Space(name: "Test", image: "AH_testImage"))
+            DetailledSpaceListeView(space: space)
         }, label: {
             ZStack {
                 AsyncImage(url: URL(string : space.image)) { image in
