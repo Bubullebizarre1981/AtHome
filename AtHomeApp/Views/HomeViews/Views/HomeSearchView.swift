@@ -22,14 +22,10 @@ struct HomeSearchView: View {
                 .padding(.horizontal, 10)
             ForEach(objectViewModel.objects) { object in
                 if searchText.isEmpty {
-                    ButtonObjectExView(rightOrLeft: true)
+                    ButtonObjectExView(rightOrLeft: true, object: object)
                 } else if object.name.contains(searchText) {
-//                    return objectViewModel.objects.filter { object in
-//                        object.name.lowercased().contains(searchText.lowercased())
-//                    }
-                    ButtonObjectExView(rightOrLeft: true)
+                    ButtonObjectExView(rightOrLeft: true, object: object)
                 }
-//                ButtonObjectExView(rightOrLeft: true)
             }
             
             .onAppear(perform: {

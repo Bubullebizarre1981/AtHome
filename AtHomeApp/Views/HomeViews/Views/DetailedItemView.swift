@@ -10,9 +10,10 @@ import SwiftUI
 struct DetailedItemView: View {
     @ObservedObject var scientificInfoViewModel: ScientificInfoViewModel = ScientificInfoViewModel()
     var object: Object
+    
     var body: some View {
         VStack {
-            ImageObjectExView(imageSize: 200)
+            ImageObjectExView(imageSize: 200, imageUrl: object.image)
             ScrollView() {
                 VStack(spacing : 20) {
                     ForEach (scientificInfoViewModel.scientificInfos) {info in
@@ -22,8 +23,6 @@ struct DetailedItemView: View {
             }
         }.onAppear(perform:{
             scientificInfoViewModel.fetchInfosByObjetcID(objectID: object.id.uuidString)
-            print(scientificInfoViewModel.scientificInfos)
-            print("to")
         })
     }
 }

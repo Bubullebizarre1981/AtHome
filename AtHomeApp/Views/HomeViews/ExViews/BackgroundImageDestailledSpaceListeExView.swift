@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct BackgroundImageDestailledSpaceListeExView: View {
-    var imageUrl: String
+    let space: Space
     var opacity: Double = 0.5
+    
     var body: some View {
-        AsyncImage(url: URL(string: imageUrl)) { phase in
+        AsyncImage(url: URL(string: space.image)) { phase in
             if let image = phase.image {
                 image
                     .resizable()
@@ -20,10 +21,10 @@ struct BackgroundImageDestailledSpaceListeExView: View {
                     .padding(.leading, 530)
             }
         }
-        .blur(radius: 5)
+//        .blur(radius: 5)
         Rectangle()
             .fill(Color.white.opacity(0.5))
             .blur(radius: 10)
-            .ignoresSafeArea()
+//            .ignoresSafeArea()
     }
 }

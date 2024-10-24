@@ -15,6 +15,8 @@ struct ButtonDetailledSpaceListeExView: View {
     var image: String?
     var name: String
     
+//    space
+    
     var body: some View {
         
         RoundedRectangle(cornerRadius: 30)
@@ -35,7 +37,7 @@ struct ButtonDetailledSpaceListeExView: View {
                             .foregroundColor(.black)
                     } else {
                         NavigationLink(destination: {
-                            DetailedItemView()
+//                            DetailedItemView()
                         }, label: {
                             VStack {
                                 AsyncImage(url: URL(string: image!)) { phase in

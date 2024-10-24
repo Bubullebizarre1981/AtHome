@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ButtonObjectExView: View {
     let rightOrLeft: Bool
+    let object: Object
     
     var body: some View {
         NavigationLink(destination: {
@@ -25,12 +26,12 @@ struct ButtonObjectExView: View {
                         TextDisplayExView(textToDisplay: "Test")
                             .rotationEffect(.degrees(-10))
                         Spacer()
-                        ImageObjectExView(imageSize : 100)
+                        ImageObjectExView(imageSize : 100, imageUrl: object.image)
                             .rotationEffect(.degrees(10))
                         Spacer()
                     } else {
                         Spacer()
-                        ImageObjectExView(imageSize : 100)
+                        ImageObjectExView(imageSize : 100, imageUrl: object.image)
                             .rotationEffect(.degrees(-10))
                         Spacer()
                         TextDisplayExView(textToDisplay: "Test")
@@ -45,5 +46,5 @@ struct ButtonObjectExView: View {
 }
 
 #Preview {
-    ButtonObjectExView(rightOrLeft: false)
+    ButtonObjectExView(rightOrLeft: false, object: Object(name: "", image: "", description: "", creationDate: ""))
 }
