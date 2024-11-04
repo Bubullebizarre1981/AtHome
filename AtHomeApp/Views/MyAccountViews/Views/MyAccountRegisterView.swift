@@ -74,25 +74,24 @@ struct MyAccountRegisterView: View {
                     .stroke(lineWidth: 1)
                     .foregroundStyle(.ahDarkBlue)
             )
+            Spacer()
+            Button(action: {
+                
+            }) {
+                Text("Confirmer")
+                    .font(.system(size: 24))
+                    .foregroundStyle(.white)
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.ahDarkBlue)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 60)
         }
         .padding()
         Spacer()
     }
-    
-    func registerUser() {
-        // Basic validation example
-        guard !name.isEmpty, !email.isEmpty, !password.isEmpty, password == confirmPassword else {
-            print("Error: Invalid input")
-            return
-        }
-        
-        // Create a new user object
-        _ = User(name: name, email: email, password: password, best_streak: 0, actual_streak: 0)
-        
-        // Now add logic to send `newUser` to the backend using `userViewModel`
-        // For example, you can add a function in your ViewModel to handle user registration
-    }
-
 }
 
 #Preview {

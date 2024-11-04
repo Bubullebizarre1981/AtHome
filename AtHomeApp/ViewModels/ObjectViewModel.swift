@@ -41,9 +41,13 @@ class ObjectViewModel: ObservableObject {
             return
         }
         
-        print(url)
+        var request = URLRequest(url: url)
         
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        //Configurer la requête
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 do {
                     let decodedObjects = try JSONDecoder().decode([Object].self, from: data)

@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		E228DBB32CD9172900161748 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E228DBB22CD9172900161748 /* Security.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		EA7A91812CB67BA50059CD82 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E228DBB22CD9172900161748 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		EA7A916E2CB67BA40059CD82 /* AtHomeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AtHomeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7A91802CB67BA50059CD82 /* AtHomeAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtHomeAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA7A918A2CB67BA50059CD82 /* AtHomeAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AtHomeAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -42,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E228DBB32CD9172900161748 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,10 +68,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E228DBB12CD9172900161748 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E228DBB22CD9172900161748 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		EA7A91652CB67BA40059CD82 = {
 			isa = PBXGroup;
 			children = (
 				EA7A91702CB67BA40059CD82 /* AtHomeApp */,
+				E228DBB12CD9172900161748 /* Frameworks */,
 				EA7A916F2CB67BA40059CD82 /* Products */,
 			);
 			sourceTree = "<group>";

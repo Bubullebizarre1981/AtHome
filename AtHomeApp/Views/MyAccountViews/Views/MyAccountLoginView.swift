@@ -12,6 +12,9 @@ struct MyAccountLoginView: View {
     @State private var name = ""
     @State private var password = ""
     @State private var souvenirDeMoi = false
+    @State private var navigateToBadges = false
+    
+    var userViewModel = UserViewModel()
     
     var body: some View {
         Spacer()
@@ -22,6 +25,8 @@ struct MyAccountLoginView: View {
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
                 TextField("Nom", text: $name)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
             }
@@ -35,6 +40,8 @@ struct MyAccountLoginView: View {
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
                 SecureField("Mot de passe", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .padding(10)
             }
             .background(
@@ -45,10 +52,30 @@ struct MyAccountLoginView: View {
                 Toggle("Se souvenir de moi", isOn: $souvenirDeMoi)
                     .toggleStyle(CircularToggleStyle())
             }
+            Spacer()
+            Button(action: {
+                if userViewModel.login(email: name, password: password) == true {
+                    navigateToBadges = true
+                }
+            }) {
+                Text("Confirmer")
+                    .font(.system(size: 24))
+                    .foregroundStyle(.white)
+                    .padding(12)
+                    .frame(maxWidth: .infinity)
+                    .background(Color.ahDarkBlue)
+                    .cornerRadius(10)
+            }
+            .padding(.horizontal)
+            .padding(.bottom, 60)
+            .navigationDestination(isPresented: $navigateToBadges) {
+                MyBadgeView()
+            }
         }
         .foregroundStyle(.ahDarkBlue)
         .padding()
         Spacer()
+        
     }
 }
 

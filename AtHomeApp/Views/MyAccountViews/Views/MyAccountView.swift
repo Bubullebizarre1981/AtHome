@@ -26,19 +26,19 @@ struct MyAccountView: View {
                 } else {
                     MyAccountLoginView()
                 }
-                Button(action: {
-                    navigateToBadges = true
-                }) {
-                    Text("Confirmer")
-                        .font(.system(size: 24))
-                        .foregroundStyle(.white)
-                        .padding(12)
-                        .frame(maxWidth: .infinity)
-                        .background(Color.ahDarkBlue)
-                        .cornerRadius(10)
-                }
-                .padding(.horizontal)
-                .padding(.bottom, 60)
+//                Button(action: {
+//                    navigateToBadges = true
+//                }) {
+//                    Text("Confirmer")
+//                        .font(.system(size: 24))
+//                        .foregroundStyle(.white)
+//                        .padding(12)
+//                        .frame(maxWidth: .infinity)
+//                        .background(Color.ahDarkBlue)
+//                        .cornerRadius(10)
+//                }
+//                .padding(.horizontal)
+//                .padding(.bottom, 60)
             }
             .navigationDestination(isPresented: $navigateToBadges) {
                 MyBadgeView()
