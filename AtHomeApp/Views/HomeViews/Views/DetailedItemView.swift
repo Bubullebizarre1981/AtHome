@@ -23,6 +23,8 @@ struct DetailedItemView: View {
             }
             ScrollView() {
                 VStack(spacing: 32) {
+                    Text(object.description)
+                    .foregroundColor(Color(.black))
                     ForEach (scientificInfoViewModel.scientificInfos) {info in
                         ScientificInfoCellExView(titleText:info.title, bodyText:info.text)
                     }

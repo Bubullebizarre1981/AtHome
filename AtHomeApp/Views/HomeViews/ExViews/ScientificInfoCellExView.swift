@@ -14,8 +14,13 @@ struct ScientificInfoCellExView: View {
     var body: some View {
         VStack(spacing: 20){
             HStack {
-                TextDisplayExView(textToDisplay: titleText)
-                    .rotationEffect(.degrees(.random(in: -5...0)))
+// *** SI ON PASSE L'HISTORIQUE COMME UN ScientificInfo ***
+//                if titleText == "Historique" {
+//                    EmptyView()
+//                } else {
+                    TextDisplayExView(textToDisplay: titleText)
+                        .rotationEffect(.degrees(.random(in: -5...0)))
+//                }
                 Spacer()
             }
             HStack {
