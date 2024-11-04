@@ -22,10 +22,10 @@ struct MyAccountRegisterView: View {
                 Image(systemName: "person.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
+                    .accessibilityHidden(true)
                 TextField("Nom", text: $name)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
-                
             }
             .background(
                 RoundedRectangle(cornerRadius: 8)
@@ -36,6 +36,7 @@ struct MyAccountRegisterView: View {
                 Image(systemName: "envelope.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
+                    .accessibilityHidden(true)
                 TextField("Email", text: $email)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
@@ -49,6 +50,7 @@ struct MyAccountRegisterView: View {
                 Image(systemName: "lock.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
+                    .accessibilityHidden(true)
                 SecureField("Mot de passe", text: $password)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
@@ -62,7 +64,7 @@ struct MyAccountRegisterView: View {
                 Image(systemName: "lock.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
-                
+                    .accessibilityHidden(true)
                 SecureField("Confirmer mot de passe", text: $confirmPassword )
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
