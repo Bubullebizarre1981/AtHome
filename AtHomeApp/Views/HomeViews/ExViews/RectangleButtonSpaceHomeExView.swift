@@ -34,7 +34,7 @@ struct RectangleButtonSpaceHomeExView: View {
                     .padding(8)
                     .background(content: {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(.ahWhite.opacity(0.75))
+                            .fill(.ahWhite)
                             .stroke(.ahTrueBlack, lineWidth: 1)
                     })
             }

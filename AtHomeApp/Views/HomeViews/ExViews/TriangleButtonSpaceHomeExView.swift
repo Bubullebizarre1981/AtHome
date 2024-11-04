@@ -20,15 +20,21 @@ struct TriangleButtonSpaceHomeExView: View {
                 Triangle()
                     .stroke(.ahOrange, lineWidth: 8)
                     .frame(width : width, height: height)
-                AsyncImage(url : URL(string : space.image))
-                    .frame(width : width, height: height)
-                    .clipShape(Triangle())
+                AsyncImage(url: URL(string : space.image)) { image in
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                } placeholder: {
+                    Color.gray
+                }
+                .frame(width : width, height: height)
+                .clipShape(Triangle())
                 Text(space.name)
                     .foregroundStyle(.ahTrueBlack)
                     .padding(8)
                     .background(content: {
                         RoundedRectangle(cornerRadius: 8)
-                            .fill(.ahWhite.opacity(0.75))
+                            .fill(.ahWhite)
                             .stroke(.ahTrueBlack, lineWidth: 1)
                     })
             }
@@ -37,5 +43,5 @@ struct TriangleButtonSpaceHomeExView: View {
 }
 
 #Preview {
-    TriangleButtonSpaceHomeExView(width: 100, height: 100, space: Space(id: UUID(), name: "Test", image: "Test"))
+    TriangleButtonSpaceHomeExView(width: 300, height: 100, space: Space(id: UUID(), name: "Grenier", image: "http://localhost:8081/images/spaces/attic.jpg"))
 }

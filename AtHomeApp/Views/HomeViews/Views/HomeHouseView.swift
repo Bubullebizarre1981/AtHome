@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HomeHouseView: View {
-    let symbolArray: [String] = ["fan.fill", "frying.pan.fill", "lightbulb.fill", "lamp.desk.fill", "shower.fill", "bathtub.fill", "chair.lounge.fill", "chair.fill", "cabinet.fill", "sink.fill", "toilet.fill", "refrigerator.fill", "microwave.fill", "cooktop.fill", "oven.fill"]
+    let symbolArray: [String] = ["fan.fill", "frying.pan.fill", "lightbulb.fill", "lamp.desk.fill", "shower.fill", "bathtub.fill", "chair.lounge.fill", "chair.fill", "cabinet.fill"]
     
     @ObservedObject var spaceViewModel = SpaceViewModel()
     
@@ -21,7 +21,9 @@ struct HomeHouseView: View {
         ZStack {
             ForEach(symbolArray, id : \.self) { symbol in
                 AnimateImageExView(imageSymbol : symbol)
-                    .rotationEffect(.degrees(.random(in: 0...360)))
+                    .accessibilityHidden(true)
+                    .offset(x: .random(in: -UIScreen.main.bounds.width/2...UIScreen.main.bounds.width/2), y: .random(in: -UIScreen.main.bounds.height/2...UIScreen.main.bounds.height/2)
+                    )
             }
             if spaceViewModel.spaces.isEmpty {
                 ZStack {

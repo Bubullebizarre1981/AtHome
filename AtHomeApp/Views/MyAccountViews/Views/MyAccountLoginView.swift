@@ -20,6 +20,7 @@ struct MyAccountLoginView: View {
                 Image(systemName: "person.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
+                    .accessibilityHidden(true)
                 TextField("Nom", text: $name)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
@@ -32,6 +33,7 @@ struct MyAccountLoginView: View {
                 Image(systemName: "lock.fill")
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
+                    .accessibilityHidden(true)
                 SecureField("Mot de passe", text: $password)
                     .padding(10)
             }

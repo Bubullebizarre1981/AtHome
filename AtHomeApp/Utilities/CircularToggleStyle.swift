@@ -15,7 +15,6 @@ struct CircularToggleStyle: ToggleStyle {
                     .fill(configuration.isOn ? Color.ahDarkBlue : Color.white)
                     .strokeBorder(lineWidth: 2)
                     .frame(width: 20, height: 20)
-                
                 if configuration.isOn {
                     Image(systemName: "checkmark")
                         .foregroundColor(.white)
