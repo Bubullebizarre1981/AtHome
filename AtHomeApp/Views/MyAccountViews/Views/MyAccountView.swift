@@ -22,23 +22,10 @@ struct MyAccountView: View {
                 AuthentificationSelectionExView(selection: $selectedView)
                     .padding()
                 if selectedView == 0 {
-                    MyAccountRegisterView()
+                    MyAccountRegisterView(selectedView : $selectedView)
                 } else {
                     MyAccountLoginView()
                 }
-//                Button(action: {
-//                    navigateToBadges = true
-//                }) {
-//                    Text("Confirmer")
-//                        .font(.system(size: 24))
-//                        .foregroundStyle(.white)
-//                        .padding(12)
-//                        .frame(maxWidth: .infinity)
-//                        .background(Color.ahDarkBlue)
-//                        .cornerRadius(10)
-//                }
-//                .padding(.horizontal)
-//                .padding(.bottom, 60)
             }
             .navigationDestination(isPresented: $navigateToBadges) {
                 MyBadgeView()

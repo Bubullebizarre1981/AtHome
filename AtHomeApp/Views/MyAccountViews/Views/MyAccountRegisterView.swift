@@ -15,6 +15,12 @@ struct MyAccountRegisterView: View {
     @State private var confirmPassword = ""
     @State private var souvenirDeMoi = false
     
+    @State var errorMessage = ""
+    
+    @Binding var selectedView : Int
+    
+    var userViewModel = UserViewModel()
+    
     var body: some View {
         Spacer()
         VStack(spacing: 20) {
@@ -24,6 +30,8 @@ struct MyAccountRegisterView: View {
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
                 TextField("Nom", text: $name)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
             }
@@ -38,6 +46,8 @@ struct MyAccountRegisterView: View {
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
                 TextField("Email", text: $email)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
             }
@@ -52,6 +62,8 @@ struct MyAccountRegisterView: View {
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
                 SecureField("Mot de passe", text: $password)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
             }
@@ -65,7 +77,9 @@ struct MyAccountRegisterView: View {
                     .foregroundStyle(.ahDarkBlue)
                     .padding(.leading, 10)
                     .accessibilityHidden(true)
-                SecureField("Confirmer mot de passe", text: $confirmPassword )
+                SecureField("Confirmer mot de passe", text: $confirmPassword)
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
                     .font(.system(size: 18, weight: .regular))
                     .padding(10)
             }
@@ -74,9 +88,23 @@ struct MyAccountRegisterView: View {
                     .stroke(lineWidth: 1)
                     .foregroundStyle(.ahDarkBlue)
             )
+            if errorMessage != "" {
+                Text(errorMessage)
+                    .foregroundStyle(.red)
+                    .bold()
+            }
             Spacer()
             Button(action: {
-                
+                if password != confirmPassword || password.isEmpty {
+                    errorMessage = "Mauvaise confirmation de mot de passe"
+                } else if name.isEmpty {
+                    errorMessage = "Veuillez remplir le Nom"
+                } else if email.isEmpty {
+                    errorMessage = "Veuillez remplir l'email"
+                } else {
+                    userViewModel.register(name: name, email: email, password: password, confirmPassword: confirmPassword)
+                    selectedView = 1
+                }
             }) {
                 Text("Confirmer")
                     .font(.system(size: 24))
@@ -95,5 +123,5 @@ struct MyAccountRegisterView: View {
 }
 
 #Preview {
-    MyAccountRegisterView()
+    MyAccountRegisterView(selectedView: .constant(0))
 }

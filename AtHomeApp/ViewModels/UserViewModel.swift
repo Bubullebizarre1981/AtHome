@@ -11,29 +11,7 @@ class UserViewModel: ObservableObject {
     @Published var users: [User] = []
     private let baseUrl: String = "http://127.0.0.1:8081/users/"
     
-    //    func fetchUsers() {
-    //        guard let url = URL(string : baseUrl) else {
-    //            print("Invalid Url : Error")
-    //            return
-    //        }
-    //
-    //        URLSession.shared.dataTask(with: url) { data, response, error in
-    //            if let data = data {
-    //                do {
-    //                    let decodedUsers = try JSONDecoder().decode([User].self, from: data)
-    //                    DispatchQueue.main.async {
-    //                        self.users = decodedUsers
-    //                    }
-    //                } catch {
-    //                    print("Error decoding data : \(error)")
-    //                }
-    //            } else if let error = error {
-    //                print("Error fetching data : \(error)")
-    //            }
-    //        }.resume()
-    //    }
-    
-    func register(email : String, password : String) {
+    func register(name: String, email : String, password : String, confirmPassword : String) {
         //Configurer l'url
         let url = URL(string : baseUrl)!
         var request = URLRequest(url: url)
@@ -44,22 +22,26 @@ class UserViewModel: ObservableObject {
         
         //Ajouter les identifiants dans le body
         do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: ["email": email, "password": password])
+            request.httpBody = try JSONSerialization.data(withJSONObject: ["name" : name, "email": email, "password": password, "bestStreak" : 0, "actualStreak" : 0])
         } catch {
             fatalError("Erreur de serialisation en JSON")
         }
         
         //Exécuter la requête
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error, let responseHTTP = response as? HTTPURLResponse, responseHTTP.statusCode != 200 {
-                print("\(error)")
+            if let responseHTTP = response as? HTTPURLResponse, responseHTTP.statusCode != 200 {
+                print("Error")
                 return
             }
+//            if let error = error, let responseHTTP = response as? HTTPURLResponse, responseHTTP.statusCode != 200 {
+//                print("\(error)")
+//                return
+//            }
             print("Registration successful")
         }.resume()
     }
     
-    func login(email : String, password : String) -> Bool? {
+    func login(email : String, password : String) {
         //Configurer l'url
         let url = URL(string : baseUrl + "login")!
         var request = URLRequest(url: url)
@@ -71,7 +53,7 @@ class UserViewModel: ObservableObject {
         //Ajouter les identifiants dans le headers
         guard let authData = "\(email):\(password)".data(using: .utf8)?.base64EncodedString() else {
             print("Error : Impossible to encode in Base64")
-            return false
+            return
         }
         request.addValue("Basic \(authData)", forHTTPHeaderField: "Authorization")
         
@@ -92,6 +74,6 @@ class UserViewModel: ObservableObject {
             print("Login successful")
         }.resume()
         
-        return true
+        return
     }
 }

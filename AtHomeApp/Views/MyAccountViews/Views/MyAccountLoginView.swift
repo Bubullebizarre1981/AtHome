@@ -54,9 +54,7 @@ struct MyAccountLoginView: View {
             }
             Spacer()
             Button(action: {
-                if userViewModel.login(email: name, password: password) == true {
-                    navigateToBadges = true
-                }
+                
             }) {
                 Text("Confirmer")
                     .font(.system(size: 24))
