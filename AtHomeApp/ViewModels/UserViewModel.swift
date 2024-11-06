@@ -9,6 +9,8 @@ import Foundation
 
 class UserViewModel: ObservableObject {
     @Published var users: [User] = []
+    @Published var isLoggedIn: Bool = false
+    
     private let baseUrl: String = "http://127.0.0.1:8081/users/"
     
     func register(name: String, email : String, password : String, confirmPassword : String) {
@@ -29,14 +31,11 @@ class UserViewModel: ObservableObject {
         
         //Exécuter la requête
         URLSession.shared.dataTask(with: request) { data, response, error in
-            if let responseHTTP = response as? HTTPURLResponse, responseHTTP.statusCode != 200 {
-                print("Error")
+            let responseHTTP = response as? HTTPURLResponse
+            if  responseHTTP?.statusCode != 200 {
+                print("Registration failed")
                 return
             }
-//            if let error = error, let responseHTTP = response as? HTTPURLResponse, responseHTTP.statusCode != 200 {
-//                print("\(error)")
-//                return
-//            }
             print("Registration successful")
         }.resume()
     }
@@ -72,8 +71,54 @@ class UserViewModel: ObservableObject {
             }
             
             print("Login successful")
+            DispatchQueue.main.async {
+                self.isLoggedIn = true
+            }
         }.resume()
+    }
+    
+    func getById(id: String) {
+        //Configurer l'url
+        guard let url = URL(string: baseUrl + id) else {
+            print("Invalid URL")
+            return
+        }
+        var request = URLRequest(url: url)
         
-        return
+        //Configurer la requête
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
+            if let data = data {
+                do {
+                    let decodedUser = try JSONDecoder().decode(User.self, from: data)
+                    DispatchQueue.main.async {
+                        self.users = [decodedUser]
+                    }
+                } catch {
+                    print("Error decoding data: \(data)")
+                }
+            } else if let error = error {
+                print("Error fetching data: \(error)")
+            }
+        }.resume()
+    }
+    
+    func logOut() {
+        DispatchQueue.main.async {
+            self.isLoggedIn = false
+            KeychainManager.deleteTokenFromKeychain()
+        }
+    }
+    
+    func verifyIfLoggedIn() {
+        guard KeychainManager.getTokenFromKeychain() != nil else {
+            return
+        }
+        
+        DispatchQueue.main.async {
+            self.isLoggedIn = true
+        }
     }
 }

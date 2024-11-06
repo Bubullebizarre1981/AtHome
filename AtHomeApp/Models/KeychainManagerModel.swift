@@ -49,4 +49,14 @@ struct KeychainManager {
         
         return nil
     }
+    
+    static func deleteTokenFromKeychain() {
+        let query : [String: Any] = [
+            kSecClass as String : kSecClassGenericPassword,
+            kSecAttrAccount as String : "token",
+            kSecReturnData as String : true
+        ]
+        
+        SecItemDelete(query as CFDictionary)
+    }
 }

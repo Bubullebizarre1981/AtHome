@@ -17,77 +17,15 @@ struct MyAccountRegisterView: View {
     
     @State var errorMessage = ""
     
-    @Binding var selectedView : Int
-    
     var userViewModel = UserViewModel()
     
     var body: some View {
         Spacer()
         VStack(spacing: 20) {
-            HStack {
-                Image(systemName: "person.fill")
-                    .foregroundStyle(.ahDarkBlue)
-                    .padding(.leading, 10)
-                    .accessibilityHidden(true)
-                TextField("Nom", text: $name)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .font(.system(size: 18, weight: .regular))
-                    .padding(10)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.ahDarkBlue)
-            )
-            HStack {
-                Image(systemName: "envelope.fill")
-                    .foregroundStyle(.ahDarkBlue)
-                    .padding(.leading, 10)
-                    .accessibilityHidden(true)
-                TextField("Email", text: $email)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .font(.system(size: 18, weight: .regular))
-                    .padding(10)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.ahDarkBlue)
-            )
-            HStack {
-                Image(systemName: "lock.fill")
-                    .foregroundStyle(.ahDarkBlue)
-                    .padding(.leading, 10)
-                    .accessibilityHidden(true)
-                SecureField("Mot de passe", text: $password)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .font(.system(size: 18, weight: .regular))
-                    .padding(10)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.ahDarkBlue)
-            )
-            HStack {
-                Image(systemName: "lock.fill")
-                    .foregroundStyle(.ahDarkBlue)
-                    .padding(.leading, 10)
-                    .accessibilityHidden(true)
-                SecureField("Confirmer mot de passe", text: $confirmPassword)
-                    .autocapitalization(.none)
-                    .disableAutocorrection(true)
-                    .font(.system(size: 18, weight: .regular))
-                    .padding(10)
-            }
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .stroke(lineWidth: 1)
-                    .foregroundStyle(.ahDarkBlue)
-            )
+            CustomTextFieldExView(textFieldName: "Nom", sfSymbol: "person.fill", text: $name)
+            CustomTextFieldExView(textFieldName: "Email", sfSymbol: "envelope.fill", text: $email)
+            CustomSecureFieldExView(textFieldName: "Mot de passe", sfSymbol: "lock.fill", text: $password)
+            CustomSecureFieldExView(textFieldName: "Confirmer mot de passe", sfSymbol: "lock.fill", text: $confirmPassword)
             if errorMessage != "" {
                 Text(errorMessage)
                     .foregroundStyle(.red)
@@ -103,19 +41,16 @@ struct MyAccountRegisterView: View {
                     errorMessage = "Veuillez remplir l'email"
                 } else {
                     userViewModel.register(name: name, email: email, password: password, confirmPassword: confirmPassword)
-                    selectedView = 1
                 }
-            }) {
+            }, label: {
                 Text("Confirmer")
-                    .font(.system(size: 24))
+                    .font(.title2)
                     .foregroundStyle(.white)
-                    .padding(12)
-                    .frame(maxWidth: .infinity)
-                    .background(Color.ahDarkBlue)
-                    .cornerRadius(10)
-            }
-            .padding(.horizontal)
-            .padding(.bottom, 60)
+                    .padding()
+                    .background(
+                        RoundedRectangle(cornerRadius: 8)
+                    )
+            })
         }
         .padding()
         Spacer()
@@ -123,5 +58,5 @@ struct MyAccountRegisterView: View {
 }
 
 #Preview {
-    MyAccountRegisterView(selectedView: .constant(0))
+    MyAccountRegisterView()
 }

@@ -8,18 +8,17 @@
 import Foundation
 
 class User: Codable, Identifiable {
-    var id = UUID()
+    var id : UUID?
     var name: String
     var email: String
-    var password: String
-    var best_streak: Int
-    var actual_streak: Int
+    var bestStreak: Int
+    var actualStreak: Int
     
-    init(name: String, email: String, password: String, best_streak: Int, actual_streak: Int) {
+    init(id: UUID? = nil, name: String, email: String, bestStreak: Int, actualStreak: Int) {
+        self.id = id
         self.name = name
         self.email = email
-        self.password = password
-        self.best_streak = best_streak
-        self.actual_streak = actual_streak
+        self.bestStreak = bestStreak
+        self.actualStreak = actualStreak
     }
 }

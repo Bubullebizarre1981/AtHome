@@ -10,9 +10,12 @@ import SwiftData
 
 @main
 struct AtHomeAppApp: App {
+    @StateObject private var userViewModel = UserViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(userViewModel)
         }
     }
 }

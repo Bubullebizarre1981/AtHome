@@ -36,11 +36,7 @@ struct AuthentificationSelectionExView: View {
     }
 }
 
-struct AuthentificationSelectionExView_Previews: PreviewProvider {
-    @State static var selection = 0
-    
-    static var previews: some View {
-        AuthentificationSelectionExView(selection: $selection)
-    }
+#Preview {
+    AuthentificationSelectionExView(selection: .constant(0))
 }
 

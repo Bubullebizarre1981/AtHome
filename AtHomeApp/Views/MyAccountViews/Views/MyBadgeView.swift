@@ -8,26 +8,54 @@
 import SwiftUI
 
 struct MyBadgeView: View {
+    @State var token : String?
+    @EnvironmentObject var userViewModel : UserViewModel
+    
     var body: some View {
         NavigationView {
-            ZStack {
-                Image("AH_badgeimage")
-                    .resizable()
-                Rectangle()
-                    .fill(Color.white.opacity(0.5))
-                    Text("WORK IN PROGRESS")
-                        .font(.system(size: 36, weight: .bold))
-                        .foregroundStyle(.ahDarkBlue)
-                        .padding(10)
+            VStack {
+                Text("Vous êtes connecté")
+                    .font(.largeTitle)
+                    .bold()
+                Spacer()
+                VStack(alignment: .leading, spacing : 20) {
+                    HStack {
+                        Text("Nom : ")
+                            .bold()
+                        Text(userViewModel.users.first?.name  ?? "No User")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("Email : ")
+                            .bold()
+                        Text(userViewModel.users.first?.email  ?? "No User")
+                        Spacer()
+                    }
+                }
+                Spacer()
+                Button(action: {
+                    userViewModel.logOut()
+                }, label: {
+                    Text("Se déconnecter")
+                        .font(.title2)
+                        .foregroundStyle(.white)
+                        .padding()
                         .background(
-                            RoundedRectangle(cornerRadius: 10)
-                                .fill(.ahTrueWhite)
+                            RoundedRectangle(cornerRadius: 8)
                         )
+                })
+                Spacer()
             }
+            .padding()
+            .onAppear(perform: {
+                token = KeychainManager.getTokenFromKeychain()
+                let decodedJWT = decode(jwtToken: token  ?? "No Token")
+                for i in decodedJWT {
+                    if i.key == "userId" {
+                        userViewModel.getById(id: i.value as! String)
+                    }
+                }
+            })
         }
     }
-}
-
-#Preview {
-    MyBadgeView()
 }
