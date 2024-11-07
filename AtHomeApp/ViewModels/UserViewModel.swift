@@ -113,12 +113,26 @@ class UserViewModel: ObservableObject {
     }
     
     func verifyIfLoggedIn() {
-        guard KeychainManager.getTokenFromKeychain() != nil else {
+        guard let token = KeychainManager.getTokenFromKeychain() else {
             return
         }
         
-        DispatchQueue.main.async {
-            self.isLoggedIn = true
+        let decodedJWT = decode(jwtToken: token)
+        
+        for expiration in decodedJWT {
+            if expiration.key == "expiration" {
+                for expirationTime in decodedJWT {
+                    if expirationTime.key == "expirationTime" {
+                        if (expirationTime.value as! Double) + (expiration.value as! Double) < Double(Date().timeIntervalSince1970) {
+                            logOut()
+                        } else {
+                            DispatchQueue.main.async {
+                                self.isLoggedIn = true
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

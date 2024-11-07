@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var userViewModel : UserViewModel
     
     var body: some View {
         TabView {
@@ -28,6 +29,9 @@ struct ContentView: View {
             .toolbarBackground(Color("AH_verylightBlue"), for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
         }
+        .onAppear(perform: {
+            userViewModel.verifyIfLoggedIn()
+        })
     }
 }
 
