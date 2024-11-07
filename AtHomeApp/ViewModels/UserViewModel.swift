@@ -74,6 +74,18 @@ class UserViewModel: ObservableObject {
             DispatchQueue.main.async {
                 self.isLoggedIn = true
             }
+            
+            guard let token = KeychainManager.getTokenFromKeychain() else {
+                return
+            }
+            
+            let decodedJWT = decode(jwtToken: token)
+            
+            for i in decodedJWT {
+                if i.key == "userId" {
+                    self.getById(id: i.value as! String)
+                }
+            }
         }.resume()
     }
     
@@ -132,6 +144,12 @@ class UserViewModel: ObservableObject {
                         }
                     }
                 }
+            }
+        }
+        
+        for i in decodedJWT {
+            if i.key == "userId" {
+                self.getById(id: i.value as! String)
             }
         }
     }

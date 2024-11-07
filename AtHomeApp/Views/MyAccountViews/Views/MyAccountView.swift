@@ -31,6 +31,9 @@ struct MyAccountView: View {
                 MyBadgeView()
             }
         }
+        .onAppear(perform: {
+            userViewModel.verifyIfLoggedIn()
+        })
     }
 }
 

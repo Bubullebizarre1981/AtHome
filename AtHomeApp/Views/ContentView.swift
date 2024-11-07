@@ -29,9 +29,6 @@ struct ContentView: View {
             .toolbarBackground(Color("AH_verylightBlue"), for: .tabBar)
             .toolbarBackground(.visible, for: .tabBar)
         }
-        .onAppear(perform: {
-            userViewModel.verifyIfLoggedIn()
-        })
     }
 }
 

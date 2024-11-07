@@ -22,13 +22,26 @@ struct MyBadgeView: View {
                     HStack {
                         Text("Nom : ")
                             .bold()
-                        Text(userViewModel.users.first?.name  ?? "No User")
+                        Text(userViewModel.users.first?.name  ?? "No User Data")
                         Spacer()
                     }
                     HStack {
                         Text("Email : ")
                             .bold()
-                        Text(userViewModel.users.first?.email  ?? "No User")
+                        Text(userViewModel.users.first?.email  ?? "No User Data")
+                        Spacer()
+                    }
+                    HStack {
+                        Text("Meilleur Streak : ")
+                            .bold()
+                        Text("\(userViewModel.users.first?.bestStreak ?? -1)")
+                        Spacer()
+                    }
+                    
+                    HStack {
+                        Text("Streak Actuelle : ")
+                            .bold()
+                        Text("\(userViewModel.users.first?.actualStreak ?? -1)")
                         Spacer()
                     }
                 }
@@ -44,18 +57,13 @@ struct MyBadgeView: View {
                             RoundedRectangle(cornerRadius: 8)
                         )
                 })
-                Spacer()
             }
             .padding()
-            .onAppear(perform: {
-                token = KeychainManager.getTokenFromKeychain()
-                let decodedJWT = decode(jwtToken: token  ?? "No Token")
-                for i in decodedJWT {
-                    if i.key == "userId" {
-                        userViewModel.getById(id: i.value as! String)
-                    }
-                }
-            })
         }
     }
+}
+
+#Preview {
+    MyBadgeView()
+        .environmentObject(UserViewModel())
 }
