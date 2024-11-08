@@ -20,7 +20,12 @@ class SpaceViewModel: ObservableObject {
             print("Invalid URL")
             return
         }
-        URLSession.shared.dataTask(with: url) { data, response, error in
+        var request = URLRequest(url: url)
+        
+        request.httpMethod = "GET"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 do {
                     let decodedSpaces = try JSONDecoder().decode([Space].self, from: data)

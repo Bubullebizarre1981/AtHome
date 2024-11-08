@@ -41,22 +41,18 @@ class UserViewModel: ObservableObject {
     }
     
     func login(email : String, password : String) {
-        //Configurer l'url
         let url = URL(string : baseUrl + "login")!
         var request = URLRequest(url: url)
-        
-        //Configurer la requête
+
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        //Ajouter les identifiants dans le headers
         guard let authData = "\(email):\(password)".data(using: .utf8)?.base64EncodedString() else {
             print("Error : Impossible to encode in Base64")
             return
         }
         request.addValue("Basic \(authData)", forHTTPHeaderField: "Authorization")
         
-        //Exécuter la requête
         URLSession.shared.dataTask(with: request) { data, response, error in
             guard error == nil, let response = response as? HTTPURLResponse, response.statusCode == 200, let data = data else {
                 print("Error: \(String(describing: error?.localizedDescription))")
@@ -66,32 +62,22 @@ class UserViewModel: ObservableObject {
             do {
                 let token = try JSONDecoder().decode(JWToken.self, from: data)
                 KeychainManager.saveTokenToKeychain(token: token.token)
+                print("Login successful")
             } catch {
                 print("Error decoding Token")
             }
-            
-            print("Login successful")
+        
             DispatchQueue.main.async {
                 self.isLoggedIn = true
             }
             
-            guard let token = KeychainManager.getTokenFromKeychain() else {
-                return
-            }
-            
-            let decodedJWT = decode(jwtToken: token)
-            
-            for i in decodedJWT {
-                if i.key == "userId" {
-                    self.getById(id: i.value as! String)
-                }
-            }
+            self.getById()
         }.resume()
     }
     
-    func getById(id: String) {
+    func getById() {
         //Configurer l'url
-        guard let url = URL(string: baseUrl + id) else {
+        guard let url = URL(string: baseUrl + "id") else {
             print("Invalid URL")
             return
         }
@@ -100,6 +86,15 @@ class UserViewModel: ObservableObject {
         //Configurer la requête
         request.httpMethod = "GET"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        //Récupérer notre Token dans le trousseau
+        guard let token = KeychainManager.getTokenFromKeychain() else {
+            print("No Token found")
+            return
+        }
+        
+        //Ajout du token dans le header
+        request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
@@ -147,10 +142,6 @@ class UserViewModel: ObservableObject {
             }
         }
         
-        for i in decodedJWT {
-            if i.key == "userId" {
-                self.getById(id: i.value as! String)
-            }
-        }
+        self.getById()
     }
 }
